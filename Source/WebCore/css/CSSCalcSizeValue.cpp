@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Samuel Weinig <sam@webkit.org>
+ * Copyright (C) 2026 Apple Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -22,39 +22,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#pragma once
+#include "config.h"
+#include "CSSCalcSizeValue.h"
 
-#include "CSSPrimitiveNumericRange.h"
-#include <wtf/Forward.h>
+#include "CSSSerializationContext.h"
+#include <wtf/text/StringBuilder.h>
 
 namespace WebCore {
 
-namespace CSS {
-struct SerializationContext;
+Ref<CSSCalcSizeValue> CSSCalcSizeValue::create(CSS::CalcSizeFunction&& calcSize)
+{
+    return adoptRef(*new CSSCalcSizeValue(WTF::move(calcSize)));
 }
 
-namespace CSSCalc {
+CSSCalcSizeValue::CSSCalcSizeValue(CSS::CalcSizeFunction&& calcSize)
+    : CSSValue(ClassType::CalcSize)
+    , m_calcSize(WTF::move(calcSize))
+{
+}
 
-struct Child;
-struct Tree;
+String CSSCalcSizeValue::customCSSText(const CSS::SerializationContext& context) const
+{
+    StringBuilder builder;
+    CSS::serializationForCSS(builder, context, m_calcSize);
+    return builder.toString();
+}
 
-struct SerializationOptions {
-    // `range` represents the allowed numeric range for the calculated result.
-    CSS::Range range;
+void CSSCalcSizeValue::collectComputedStyleDependencies(ComputedStyleDependencies& dependencies) const
+{
+    m_calcSize->parameters.collectComputedStyleDependencies(dependencies);
+}
 
-    // `serializationContext` is the context used for CSS serialization state.
-    const CSS::SerializationContext& serializationContext;
-};
+bool CSSCalcSizeValue::equals(const CSSCalcSizeValue& other) const
+{
+    return m_calcSize == other.m_calcSize;
+}
 
-// https://drafts.csswg.org/css-values-4/#serialize-a-math-function
-void serializationForCSS(StringBuilder&, const Tree&, const SerializationOptions&);
-String serializationForCSS(const Tree&, const SerializationOptions&);
-
-void serializationForCSS(StringBuilder&, const Child&, const SerializationOptions&);
-String serializationForCSS(const Child&, const SerializationOptions&);
-
-// Serializes a `<calc-sum>` as a math function argument, omitting the grouping parentheses.
-void serializationForCSSAsFunctionArgument(StringBuilder&, const Tree&, const SerializationOptions&);
-
-} // namespace CSSCalc
 } // namespace WebCore

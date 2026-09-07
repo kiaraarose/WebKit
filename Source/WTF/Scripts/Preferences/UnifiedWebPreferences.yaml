@@ -837,6 +837,14 @@ CSSCalcMixEnabled:
   humanReadableDescription: "Enable support for CSS calc-mix()"
   defaultValue: true
 
+CSSCalcSizeFunctionEnabled:
+  type: bool
+  category: css
+  status: testable
+  humanReadableName: "CSS calc-size()"
+  humanReadableDescription: "Enable support for CSS calc-size()"
+  defaultValue: false
+
 CSSColorLayersEnabled:
   type: bool
   category: css

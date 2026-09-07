@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Samuel Weinig <sam@webkit.org>
+ * Copyright (C) 2026 Apple Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -24,37 +24,27 @@
 
 #pragma once
 
-#include "CSSPrimitiveNumericRange.h"
-#include <wtf/Forward.h>
+#include <WebCore/CSSCalcSizeFunction.h>
+#include <WebCore/CSSValue.h>
 
 namespace WebCore {
 
-namespace CSS {
-struct SerializationContext;
-}
+class CSSCalcSizeValue final : public CSSValue {
+public:
+    static Ref<CSSCalcSizeValue> create(CSS::CalcSizeFunction&&);
 
-namespace CSSCalc {
+    const CSS::CalcSizeFunction& calcSize() const LIFETIME_BOUND { return m_calcSize; }
 
-struct Child;
-struct Tree;
+    String customCSSText(const CSS::SerializationContext&) const;
+    bool equals(const CSSCalcSizeValue&) const;
+    void collectComputedStyleDependencies(ComputedStyleDependencies&) const;
 
-struct SerializationOptions {
-    // `range` represents the allowed numeric range for the calculated result.
-    CSS::Range range;
+private:
+    explicit CSSCalcSizeValue(CSS::CalcSizeFunction&&);
 
-    // `serializationContext` is the context used for CSS serialization state.
-    const CSS::SerializationContext& serializationContext;
+    CSS::CalcSizeFunction m_calcSize;
 };
 
-// https://drafts.csswg.org/css-values-4/#serialize-a-math-function
-void serializationForCSS(StringBuilder&, const Tree&, const SerializationOptions&);
-String serializationForCSS(const Tree&, const SerializationOptions&);
-
-void serializationForCSS(StringBuilder&, const Child&, const SerializationOptions&);
-String serializationForCSS(const Child&, const SerializationOptions&);
-
-// Serializes a `<calc-sum>` as a math function argument, omitting the grouping parentheses.
-void serializationForCSSAsFunctionArgument(StringBuilder&, const Tree&, const SerializationOptions&);
-
-} // namespace CSSCalc
 } // namespace WebCore
+
+SPECIALIZE_TYPE_TRAITS_CSS_VALUE(CSSCalcSizeValue, isCalcSizeValue())
