@@ -201,6 +201,21 @@
             },
             "RunLoopObserver.CrossThread_TwoObserversOnDifferentLoops": {
                 "expected": {"all": {"status": ["CRASH", "PASS"], "bug": "webkit.org/b/315297"}}
+            },
+            "PushDatabase.ManyInFlightOps": {
+                "expected": {"all": {"status": ["CRASH"], "bug": "webkit.org/b/323618"}}
+            },
+            "PushDatabase.StartsFromScratchOnDowngrade": {
+                "expected": {"all": {"status": ["CRASH"], "bug": "webkit.org/b/323618"}}
+            },
+            "PushDatabase.CanMigrateV2DatabaseToCurrentSchema": {
+                "expected": {"all": {"status": ["CRASH"], "bug": "webkit.org/b/323618"}}
+            },
+            "FontCascadeTest.ComplexTextRetainsSystemFallbackFonts": {
+                "expected": {"all": {"status": ["FAIL"], "bug": "webkit.org/b/323619"}}
+            },
+            "GraphicsContextGLTextureMapperTest.ClearBufferIncorrectSizes": {
+                "expected": {"all": {"status": ["FAIL"], "bug": "webkit.org/b/323621"}}
             }
         }
     },
@@ -220,6 +235,12 @@
             },
             "WebKit.ResizeWindowAfterCrash": {
                 "expected": {"all": {"slow": true}}
+            },
+            "WebKit.EventModifiers": {
+                "expected": {"gtk": {"status": ["FAIL"], "bug": "webkit.org/b/323622"}}
+            },
+            "WebKit.SpacebarScrolling": {
+                "expected": {"gtk": {"status": ["FAIL"], "bug": "webkit.org/b/323624"}}
             }
         }
     },
