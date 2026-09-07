@@ -740,6 +740,7 @@
 				WebCore/cocoa/GraphicsContextCGTests.mm,
 				WebCore/cocoa/H264UtilitiesCocoaTests.mm,
 				WebCore/cocoa/ImageRotationSessionVT.cpp,
+				WebCore/cocoa/IOSurfacePoolTests.cpp,
 				WebCore/cocoa/IOSurfaceTests.mm,
 				WebCore/cocoa/ISOBMFFTrackInfoParserTests.cpp,
 				WebCore/cocoa/MediaPlayerPrivateAVFoundationObjCTests.mm,

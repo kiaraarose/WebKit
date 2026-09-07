@@ -180,6 +180,7 @@ list(APPEND TestWebCore_SOURCES
     Tests/WebCore/cocoa/CoreMediaUtilities.mm
     Tests/WebCore/cocoa/GraphicsContextCGTests.mm
     Tests/WebCore/cocoa/H264UtilitiesCocoaTests.mm
+    Tests/WebCore/cocoa/IOSurfacePoolTests.cpp
     Tests/WebCore/cocoa/IOSurfaceTests.mm
     Tests/WebCore/cocoa/ImageRotationSessionVT.cpp
     Tests/WebCore/cocoa/MediaPlayerPrivateAVFoundationObjCTests.mm
