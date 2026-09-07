@@ -917,6 +917,14 @@ CSSFontFaceMetricOverrideDescriptorsEnabled:
   humanReadableDescription: "Enable CSS @font-face metric override descriptors"
   defaultValue: true
 
+CSSFontPaletteMixFunctionEnabled:
+  type: bool
+  status: testable
+  category: css
+  humanReadableName: "CSS palette-mix() function"
+  humanReadableDescription: "Enable the CSS palette-mix() function"
+  defaultValue: false
+
 CSSFontSynthesisStyleObliqueOnlyEnabled:
   type: bool
   status: preview
