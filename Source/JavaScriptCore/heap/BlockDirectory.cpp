@@ -100,7 +100,11 @@ void BlockDirectory::updatePercentageOfPagedOutPages(SimpleStats& stats)
 MarkedBlock::Handle* BlockDirectory::findEmptyBlockToSteal()
 {
     Locker locker(bitvectorLock());
-    m_emptyCursor = (emptyBits() & ~inUseBits()).findBit(m_emptyCursor, true);
+    // A destructible block still owes its old owner a destructor pass over every cell, and whoever
+    // takes the block has to pay it inline before the block can be re-typed. That costs about a
+    // microsecond, far more than just asking the OS for a fresh block, so leave those blocks for the
+    // sweeper and only trade ones that are already swept.
+    m_emptyCursor = (emptyBits() & ~destructibleBits() & ~inUseBits()).findBit(m_emptyCursor, true);
     if (m_emptyCursor >= m_blocks.size())
         return nullptr;
     dataLogLnIf(BlockDirectoryInternal::verbose, "Setting block ", m_emptyCursor, " in use (findEmptyBlockToSteal) for ", *this);
