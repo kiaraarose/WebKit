@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Apple Inc. All rights reserved.
+ * Copyright (C) 2026 Apple Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -23,55 +23,17 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#pragma once
+#import "config.h"
+#import "Helpers/cocoa/ScreenTimeExtras.h"
 
-#ifdef __cplusplus
-#import <wtf/RetainPtr.h>
-#endif
+#if ENABLE(SCREEN_TIME)
 
-@class NSData;
-@class WKWebViewConfiguration;
-@class _WKFrameHandle;
+#import <ScreenTime/STScreenTimeConfiguration.h>
+#import <pal/cocoa/ScreenTimeSoftLink.h>
 
-@protocol WKUIDelegate;
-
-NS_HEADER_AUDIT_BEGIN(nullability, sendability)
-
-@interface TestPDFBuilder : NSObject
-+ (NSData *)pdfDataWithLink;
-@end
-
-@interface PDFPrintUIDelegate : NSObject <WKUIDelegate>
-
-#if PLATFORM(MAC)
-- (NSSize)waitForPageSize;
-#else
-- (CGSize)waitForPageSize;
-#endif
-- (nullable _WKFrameHandle *)lastPrintedFrame;
-
-@end
-
-NS_HEADER_AUDIT_END(nullability, sendability)
-
-#ifdef __cplusplus
-
-namespace TestWebKitAPI {
-
-#if ENABLE(UNIFIED_PDF_BY_DEFAULT)
-static constexpr bool unifiedPDFForTestingEnabled = true;
-#define UNIFIED_PDF_TEST(name) TEST(UnifiedPDF, name)
-#else
-static constexpr bool unifiedPDFForTestingEnabled = false;
-#define UNIFIED_PDF_TEST(name) TEST(UnifiedPDF, DISABLED_##name)
-#endif
-
-RetainPtr<WKWebViewConfiguration> configurationForWebViewTestingUnifiedPDF(bool hudEnabled = false);
-
-RetainPtr<NSData> testPDFData();
-
-RetainPtr<NSData> testPDFDataWithLink();
-
+Class testSTScreenTimeConfigurationClass()
+{
+    return PAL::getSTScreenTimeConfigurationClassSingleton();
 }
 
-#endif // __cplusplus
+#endif // ENABLE(SCREEN_TIME)

@@ -2630,7 +2630,7 @@ TEST(TextExtractionTests, SafeBrowsingWarningBlocksTextExtraction)
 
 TEST(TextExtractionTests, DelayedSafeBrowsingWarningBlocksTextExtraction)
 {
-    DelayedLookupContext.delayDuration = 1_s;
+    DelayedLookupContext.delayDuration = 1;
 
     TestWebKitAPI::HTTPServer server({
         { "/test"_s, { "test"_s } },

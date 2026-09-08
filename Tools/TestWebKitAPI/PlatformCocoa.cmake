@@ -260,6 +260,7 @@ list(APPEND TestWebKit_SOURCES
     Helpers/WebCoreTestUtilities.cpp
 
     Helpers/cocoa/HTTPServer.mm
+    Helpers/cocoa/PDFTestHelpers.swift
     Helpers/cocoa/TestCocoaImageAndCocoaColor.mm
     Helpers/cocoa/TestElementFullscreenDelegate.mm
     Helpers/cocoa/TestNSBundleExtras.m

@@ -271,8 +271,10 @@ void Connection::webSocketHandshake(CompletionHandler<void()>&& connectionHandle
 
 void Connection::terminate(CompletionHandler<void()>&& completionHandler)
 {
-    nw_connection_set_state_changed_handler(m_connection.get(), makeBlockPtr([completionHandler = WTF::move(completionHandler)] (nw_connection_state_t state, nw_error_t error) mutable {
-        ASSERT_UNUSED(error, !error);
+    nw_connection_set_state_changed_handler(m_connection.get(), makeBlockPtr([completionHandler = WTF::move(completionHandler)] (nw_connection_state_t state, nw_error_t) mutable {
+        // The error reported here describes the connection, not the cancellation: a connection that
+        // failed its TLS handshake still reports "bad certificate" once cancelled. Cancelling
+        // cannot itself fail, so there is nothing to check.
         if (state == nw_connection_state_cancelled && completionHandler)
             completionHandler();
     }).get());

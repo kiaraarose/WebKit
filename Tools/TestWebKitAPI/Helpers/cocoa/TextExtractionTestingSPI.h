@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Apple Inc. All rights reserved.
+ * Copyright (C) 2026 Apple Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -25,53 +25,13 @@
 
 #pragma once
 
-#ifdef __cplusplus
-#import <wtf/RetainPtr.h>
-#endif
+#import <WebKit/WKWebView.h>
+#import <WebKit/_WKTextExtraction.h>
 
-@class NSData;
-@class WKWebViewConfiguration;
-@class _WKFrameHandle;
+// Declared in WKWebViewInternal.h, which is not installed, so tests cannot import it directly.
 
-@protocol WKUIDelegate;
+@class WKTextExtractionItem;
 
-NS_HEADER_AUDIT_BEGIN(nullability, sendability)
-
-@interface TestPDFBuilder : NSObject
-+ (NSData *)pdfDataWithLink;
+@interface WKWebView (TextExtractionTestingSPI)
+- (void)_requestTextExtraction:(_WKTextExtractionConfiguration *)configuration completionHandler:(void (^)(WKTextExtractionItem *))completionHandler;
 @end
-
-@interface PDFPrintUIDelegate : NSObject <WKUIDelegate>
-
-#if PLATFORM(MAC)
-- (NSSize)waitForPageSize;
-#else
-- (CGSize)waitForPageSize;
-#endif
-- (nullable _WKFrameHandle *)lastPrintedFrame;
-
-@end
-
-NS_HEADER_AUDIT_END(nullability, sendability)
-
-#ifdef __cplusplus
-
-namespace TestWebKitAPI {
-
-#if ENABLE(UNIFIED_PDF_BY_DEFAULT)
-static constexpr bool unifiedPDFForTestingEnabled = true;
-#define UNIFIED_PDF_TEST(name) TEST(UnifiedPDF, name)
-#else
-static constexpr bool unifiedPDFForTestingEnabled = false;
-#define UNIFIED_PDF_TEST(name) TEST(UnifiedPDF, DISABLED_##name)
-#endif
-
-RetainPtr<WKWebViewConfiguration> configurationForWebViewTestingUnifiedPDF(bool hudEnabled = false);
-
-RetainPtr<NSData> testPDFData();
-
-RetainPtr<NSData> testPDFDataWithLink();
-
-}
-
-#endif // __cplusplus

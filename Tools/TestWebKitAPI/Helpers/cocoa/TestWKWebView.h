@@ -84,6 +84,8 @@ namespace WebCore {
 class Color;
 }
 
+#endif
+
 @interface WKWebView (TestWebKitAPI)
 #if PLATFORM(IOS_FAMILY)
 @property (nonatomic, readonly) CGRect selectionClipRect;
@@ -95,9 +97,11 @@ class Color;
 #if HAVE(UI_WK_DOCUMENT_CONTEXT)
 - (void)synchronouslyAdjustSelectionWithDelta:(NSRange)range;
 #endif
-@property (nonatomic, readonly) TestWebKitAPI::AutocorrectionContext autocorrectionContext;
 @property (nonatomic, readonly) id<UITextInputTraits_Private> effectiveTextInputTraits;
+#ifdef __cplusplus
+@property (nonatomic, readonly) TestWebKitAPI::AutocorrectionContext autocorrectionContext;
 - (std::pair<CGRect, CGRect>)autocorrectionRectsForString:(NSString *)string;
+#endif
 - (NSArray<_WKTextInputContext *> *)synchronouslyRequestTextInputContextsInRect:(CGRect)rect;
 - (void)replaceText:(NSString *)input withText:(NSString *)correction shouldUnderline:(BOOL)shouldUnderline completion:(void(^)())completion;
 - (void)insertText:(NSString *)primaryString alternatives:(NSArray<NSString *> *)alternatives;
@@ -119,7 +123,9 @@ class Color;
 
 - (CALayer *)firstLayerWithName:(NSString *)layerName;
 - (CALayer *)firstLayerWithNameContaining:(NSString *)layerName;
+#ifdef __cplusplus
 - (void)forEachCALayer:(IterationStatus(^)(CALayer *))visitor;
+#endif
 
 @property (nonatomic, readonly) CGImageRef snapshotAfterScreenUpdates;
 @property (nonatomic, readonly) NSUInteger gpuToWebProcessConnectionCount;
@@ -163,8 +169,6 @@ class Color;
 - (void)visitUnsafeSite;
 @end
 
-#endif // __cplusplus
-
 @interface WKWebView (TestWebKitAPI_NonCpp)
 
 #if PLATFORM(IOS_FAMILY)
@@ -172,8 +176,6 @@ class Color;
 #endif
 
 @end
-
-#ifdef __cplusplus
 
 @interface TestMessageHandler : NSObject <WKScriptMessageHandler>
 - (void)addMessage:(NSString *)message withHandler:(dispatch_block_t)handler;
@@ -212,11 +214,13 @@ class Color;
 - (void)clickOnElementID:(NSString *)elementID;
 - (void)waitForPendingMouseEvents;
 - (void)focus;
+#ifdef __cplusplus
 - (std::optional<CGPoint>)getElementMidpoint:(NSString *)selector;
 - (Vector<WebCore::Color>)sampleColors;
 - (Vector<WebCore::Color>)sampleColorsInRect:(CGRect)rect;
 - (Vector<WebCore::Color>)sampleColorsWithInterval:(unsigned)interval;
 - (RetainPtr<_WKFrameTreeNode>)frameTree;
+#endif
 - (void)typeCharacter:(char)character;
 - (void)setVisibility:(BOOL)isVisible;
 @end
@@ -284,7 +288,7 @@ class Color;
 @end
 
 #if PLATFORM(MAC)
-using MenuItemFilter = BOOL(^)(NSMenuItem *);
+typedef BOOL (^MenuItemFilter)(NSMenuItem *);
 #endif
 
 @interface TestWKWebView (ContextMenu)
@@ -293,5 +297,3 @@ using MenuItemFilter = BOOL(^)(NSMenuItem *);
 - (_WKContextMenuElementInfo *)rightClickAtPointAndWaitForContextMenu:(NSPoint)clickLocation;
 #endif
 @end
-
-#endif // __cplusplus
