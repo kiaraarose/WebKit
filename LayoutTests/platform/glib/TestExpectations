@@ -2672,6 +2672,8 @@ webkit.org/b/316179 webaudio/decode-audio-data-ogg-vorbis.html [ Failure ]
 # WebGL-related bugs
 #////////////////////////////////////////////////////////////////////////////////////////
 
+fast/canvas/webgl/composited-alpha-modes-match-drawImage.html [ Failure ]
+
 webkit.org/b/216071 fast/canvas/webgl/move-canvas-in-document-while-clean.html [ ImageOnlyFailure ]
 
 webkit.org/b/210239 fast/canvas/webgl/out-of-bounds-simulated-vertexAttrib0-drawArrays.html [ Slow ]
