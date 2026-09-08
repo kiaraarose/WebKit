@@ -190,7 +190,7 @@ public:
 
     static constexpr float NODELETE maxExtent(float) { return 1; }
 
-    void normalizeStopsAndEndpointsOutsideRange(Vector<ResolvedGradientStop>& stops, ColorInterpolationMethod)
+    void normalizeStopsAndEndpointsOutsideRange(Vector<ResolvedGradientStop>& stops, WebCore::ColorInterpolationMethod)
     {
         float firstOffset = *stops.first().offset;
         float lastOffset = *stops.last().offset;
@@ -237,7 +237,7 @@ public:
         return 1;
     }
 
-    void normalizeStopsAndEndpointsOutsideRange(Vector<ResolvedGradientStop>& stops, ColorInterpolationMethod colorInterpolationMethod)
+    void normalizeStopsAndEndpointsOutsideRange(Vector<ResolvedGradientStop>& stops, WebCore::ColorInterpolationMethod colorInterpolationMethod)
     {
         auto numberOfStops = stops.size();
 
@@ -292,7 +292,7 @@ public:
     static constexpr float NODELETE gradientLength() { return 1; }
     static constexpr float NODELETE maxExtent(float) { return 1; }
 
-    void normalizeStopsAndEndpointsOutsideRange(Vector<ResolvedGradientStop>& stops, ColorInterpolationMethod colorInterpolationMethod)
+    void normalizeStopsAndEndpointsOutsideRange(Vector<ResolvedGradientStop>& stops, WebCore::ColorInterpolationMethod colorInterpolationMethod)
     {
         size_t numberOfStops = stops.size();
         size_t lastStopIndex = numberOfStops - 1;
