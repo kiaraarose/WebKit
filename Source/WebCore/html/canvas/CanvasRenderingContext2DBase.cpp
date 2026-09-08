@@ -2656,21 +2656,20 @@ ExceptionOr<Ref<ImageData>> CanvasRenderingContext2DBase::getImageData(int sx, i
     IntRect imageDataRect { sx, sy, sw, sh };
     auto outputImageDataPixelFormat = settings ? settings->pixelFormat : ImageDataPixelFormat::RgbaUnorm8;
     auto outputPixelFormat = toPixelFormat(outputImageDataPixelFormat);
+    auto computedColorSpace = ImageData::computeColorSpace(settings, m_settings.colorSpace);
 
     if (scriptContext && scriptContext->requiresScriptTrackingPrivacyProtection(ScriptTrackingPrivacyCategory::Canvas)) {
         RefPtr buffer = protect(canvasBase())->createImageForNoiseInjection();
         if (!buffer)
             return Exception { ExceptionCode::InvalidStateError };
 
-        auto format = PixelBufferFormat { AlphaPremultiplication::Unpremultiplied, outputPixelFormat, buffer->colorSpace() };
+        auto format = PixelBufferFormat { AlphaPremultiplication::Unpremultiplied, outputPixelFormat, toColorSpace(computedColorSpace, allowExtendedColorSpace(outputPixelFormat)) };
         RefPtr pixelBuffer = dynamicDowncast<ArrayPixelBuffer>(buffer->getPixelBuffer(format, imageDataRect));
         if (!pixelBuffer)
             return Exception { ExceptionCode::InvalidStateError };
 
         return { { ImageData::create(pixelBuffer.releaseNonNull(), outputImageDataPixelFormat) } };
     }
-
-    auto computedColorSpace = ImageData::computeColorSpace(settings, m_settings.colorSpace);
 
     if (outputImageDataPixelFormat == ImageDataPixelFormat::RgbaUnorm8) {
         if (auto imageData = makeImageDataIfContentsCached(imageDataRect, outputPixelFormat, computedColorSpace))
