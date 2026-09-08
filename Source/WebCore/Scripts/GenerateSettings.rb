@@ -268,11 +268,12 @@ class Settings
     globalSettingsByName = {}
     settingsFiles.each do |file|
       parsedSettings = load(file).each do |name, options|
-        # An empty "webcoreBinding" entry indicates this preference uses the default, which is bound to Settings.
-        if !options["webcoreBinding"]
-          settingsByName[name] = Setting.new(name, options)
-        elsif options["webcoreBinding"] == "DeprecatedGlobalSettings"
+        # Preferences excluded from WebCore have no Settings member at all, and the
+        # deprecated globals are declared by hand in DeprecatedGlobalSettings.h.
+        if options["webcoreDeprecatedGlobalSettings"]
           globalSettingsByName[name] = Setting.new(name, options)
+        elsif !(options["excludeFrom"] || []).include?("WebCore")
+          settingsByName[name] = Setting.new(name, options)
         end
       end
     end
