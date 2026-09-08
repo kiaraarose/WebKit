@@ -14299,7 +14299,7 @@ TEST(SiteIsolation, MultiProcessBFCacheIframeRendersAfterBackNavigation)
 {
     HTTPServer server({
         { "/main"_s, { "<iframe src='https://b.com/iframe'></iframe>"_s } },
-        { "/iframe"_s, { "<a id='link' href='https://b.com/destination' target='_top'>click me</a>"_s } },
+        { "/iframe"_s, { "<body style='margin:0'><div style='width:137px;height:59px;background:magenta;transform:translateZ(0)'></div><a id='link' href='https://b.com/destination' target='_top'>click me</a></body>"_s } },
         { "/destination"_s, { "<body>destination page</body>"_s } },
     }, HTTPServer::Protocol::HttpsProxy);
 
@@ -14338,8 +14338,11 @@ TEST(SiteIsolation, MultiProcessBFCacheIframeRendersAfterBackNavigation)
     TestWebKitAPI::Util::run(&done);
     EXPECT_FALSE(frozen);
 
-    NSString *layerTree = [webView _caLayerTreeAsText];
-    EXPECT_TRUE([layerTree containsString:@"(layer bounds"]);
+    // The iframe composites a 137x59 layer, a size nothing in a.com's process can produce, so those
+    // bounds appearing in the hosted CALayer tree detect b.com's contribution alone.
+    [webView waitForNextPresentationUpdate];
+    RetainPtr layerTree = [webView _caLayerTreeAsText];
+    EXPECT_TRUE([layerTree containsString:@"width: 137 height: 59"]) << [layerTree UTF8String];
 
     startCountingAnimationFrames(webView.get(), [webView firstChildFrame]);
     expectAnimationFrameCountToIncrease(webView.get(), [webView firstChildFrame]);
