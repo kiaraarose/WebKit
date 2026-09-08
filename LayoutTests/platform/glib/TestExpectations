@@ -3414,9 +3414,6 @@ ipc/validate-message-check-in-networkconnectiontowebproces-crash.html [ Skip ]
 
 ### NEEDS PROPER TRIAGGING/GARDENING
 
-# Times out: the wiretap never captures m_databaseConnectionIdentifier.
-ipc/networksindexeddb-close-connection-during-version-change.html [ Skip ]
-
 #////////////////////////////////////////////////////////////////////////////////////////
 # End of IPC testing
 #////////////////////////////////////////////////////////////////////////////////////////
