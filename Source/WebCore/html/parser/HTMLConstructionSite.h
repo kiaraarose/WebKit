@@ -123,7 +123,7 @@ public:
     void insertFormattingElement(AtomHTMLToken&&);
     void insertHTMLHeadElement(AtomHTMLToken&&);
     void insertHTMLBodyElement(AtomHTMLToken&&);
-    void insertHTMLFormElement(AtomHTMLToken&&);
+    void insertHTMLFormElement(AtomHTMLToken&&, bool isParsingTemplateContents);
     void insertScriptElement(AtomHTMLToken&&);
     void insertTextNode(const String&);
     void insertForeignElement(AtomHTMLToken&&, const AtomString& namespaceURI);

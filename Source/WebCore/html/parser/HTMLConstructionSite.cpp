@@ -543,12 +543,12 @@ void HTMLConstructionSite::insertHTMLBodyElement(AtomHTMLToken&& token)
     m_openElements.pushHTMLBodyElement(HTMLStackItem(WTF::move(body), WTF::move(token)));
 }
 
-void HTMLConstructionSite::insertHTMLFormElement(AtomHTMLToken&& token)
+void HTMLConstructionSite::insertHTMLFormElement(AtomHTMLToken&& token, bool isParsingTemplateContents)
 {
     auto formElement = downcast<HTMLFormElement>(createHTMLElement(token));
-    // If there is no template element on the stack of open elements, set the
-    // form element pointer to point to the element created.
-    if (!openElements().hasTemplateInHTMLScope())
+    // If the parser is not parsing template contents, set the form element pointer to point to the
+    // element created.
+    if (!isParsingTemplateContents)
         m_form = formElement.ptr();
     attachLater(protect(currentNode()), formElement.copyRef());
     m_openElements.push(HTMLStackItem(WTF::move(formElement), WTF::move(token)));
