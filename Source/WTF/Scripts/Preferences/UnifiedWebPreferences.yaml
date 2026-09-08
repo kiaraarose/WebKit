@@ -276,7 +276,6 @@ AllowPrivacySensitiveOperationsInNonPersistentDataStores:
 AllowTestOnlyIPC:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
   sharedPreferenceForWebProcess: true
@@ -284,7 +283,6 @@ AllowTestOnlyIPC:
 AllowTestOnlyMockContentFilterIPC:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
   sharedPreferenceForWebProcess: true
@@ -292,7 +290,6 @@ AllowTestOnlyMockContentFilterIPC:
 AllowTestOnlyOriginAccessAllowListIPC:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
   sharedPreferenceForWebProcess: true
@@ -428,7 +425,6 @@ AlwaysZoomOnDoubleTap:
   humanReadableName: "DTTZ always"
   humanReadableDescription: "Double taps zoom, even if we dispatched a click anywhere"
   condition: PLATFORM(IOS_FAMILY)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -628,7 +624,6 @@ AutomaticLiveResizeEnabled:
   status: internal
   humanReadableName: "Enable Automatic Live Resize"
   humanReadableDescription: "Automatically synchronize web view resize with painting"
-  webKitLegacyExposed: false
   condition: PLATFORM(IOS_FAMILY)
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: WebKit::defaultAutomaticLiveResizeEnabled()
@@ -675,7 +670,6 @@ BackgroundFetchAPIEnabled:
   category: networking
   humanReadableName: "Enable background-fetch API"
   humanReadableDescription: "Enable background-fetch API"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy ]
   defaultValue: false
   sharedPreferenceForWebProcess: true
@@ -1404,7 +1398,6 @@ CaptureAudioInGPUProcessEnabled:
   humanReadableName: "GPU Process: Audio Capture"
   humanReadableDescription: "Enable audio capture in GPU Process"
   condition: ENABLE(MEDIA_STREAM)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: WebKit::defaultCaptureAudioInGPUProcessEnabled()
 
@@ -1415,7 +1408,6 @@ CaptureVideoInGPUProcessEnabled:
   humanReadableName: "GPU Process: Video Capture"
   humanReadableDescription: "Enable video capture in GPU Process"
   condition: ENABLE(MEDIA_STREAM)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "ENABLE(GPU_PROCESS_BY_DEFAULT)": true
@@ -1993,7 +1985,6 @@ EnableAccessibilityOnDemand:
   humanReadableName: "Enable Accessibility On Demand"
   humanReadableDescription: "Enable Accessibility On Demand"
   condition: PLATFORM(MAC)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "ENABLE(INITIALIZE_ACCESSIBILITY_ON_DEMAND)": true
@@ -2007,7 +1998,6 @@ EnableDebuggingFeaturesInSandbox:
   humanReadableDescription: "Enable debugging features in sandbox"
   condition: HAVE(SANDBOX_STATE_FLAGS)
   defaultsOverridable: true
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -2104,7 +2094,6 @@ EnumeratingAllNetworkInterfacesEnabled:
   type: bool
   status: internal
   humanReadableName: "Enable Enumerating All Network Interfaces"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -2112,7 +2101,6 @@ EnumeratingVisibleNetworkInterfacesEnabled:
   type: bool
   status: internal
   humanReadableName: "Enable Enumerating Visible Network Interfaces"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -2145,7 +2133,6 @@ ExperimentalSandboxEnabled:
   humanReadableName: "Enable experimental sandbox features"
   humanReadableDescription: "Enable experimental sandbox features"
   condition: HAVE(MACH_BOOTSTRAP_EXTENSION) || HAVE(SANDBOX_STATE_FLAGS)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -2243,7 +2230,6 @@ ExtensibleSSOEnabled:
   status: embedder
   getter: isExtensibleSSOEnabled
   condition: HAVE(APP_SSO)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -2282,7 +2268,6 @@ FasterClicksEnabled:
   humanReadableName: "Fast clicks"
   humanReadableDescription: "Support faster clicks on zoomable pages"
   condition: PLATFORM(IOS_FAMILY)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -2390,14 +2375,12 @@ ForceAlwaysUserScalable:
   defaultsOverridable: true
   humanReadableName: "Force always user-scalable"
   condition: PLATFORM(IOS_FAMILY)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
 ForceCompositingMode:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -2490,7 +2473,6 @@ GStreamerEnabled:
   getter: isGStreamerEnabled
   webcoreDeprecatedGlobalSettings: true
   condition: USE(GSTREAMER)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -2828,7 +2810,6 @@ IPCTestingAPIEnabled:
   humanReadableName: "IPC Testing API"
   humanReadableDescription: "Enable IPC Testing API for JavaScript"
   condition: ENABLE(IPC_TESTING_API)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -2848,7 +2829,6 @@ IgnoreInvalidMessageWhenIPCTestingAPIEnabled:
   humanReadableName: "Ignore Invalid IPC Messages For Testing"
   humanReadableDescription: "Prevents invalid IPC messages from terminating the caller"
   condition: ENABLE(IPC_TESTING_API)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -2907,7 +2887,6 @@ InactiveMediaCaptureStreamRepromptIntervalInMinutes:
   type: double
   status: embedder
   condition: ENABLE(MEDIA_STREAM)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: 10
 
@@ -2915,7 +2894,6 @@ InactiveMediaCaptureStreamRepromptWithoutUserGestureIntervalInMinutes:
   type: double
   status: embedder
   condition: ENABLE(MEDIA_STREAM)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: defaultInactiveMediaCaptureStreamRepromptWithoutUserGestureIntervalInMinutes()
 
@@ -3091,21 +3069,18 @@ InputTypeWeekEnabled:
 InspectorAttachedHeight:
   type: uint32_t
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: 500
 
 InspectorAttachedWidth:
   type: uint32_t
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: 750
 
 InspectorAttachmentSide:
   type: uint32_t
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: 0
 
@@ -3120,7 +3095,6 @@ InspectorMaximumResourcesContentSize:
 InspectorStartsAttached:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -3135,7 +3109,6 @@ InspectorSupportsShowingCertificate:
 InspectorWindowFrame:
   type: String
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: '""_str'
 
@@ -3700,7 +3673,6 @@ LogsPageMessagesToSystemConsoleEnabled:
 LongRunningMediaCaptureStreamRepromptIntervalInHours:
   type: double
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: 24
 
@@ -3802,7 +3774,6 @@ MaxParseDuration:
 MediaAudioCodecIDsAllowedInLockdownMode:
   type: String
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: '"aac ,zaac,qaac,caac,.mp3,mp4a"_str'
 
@@ -3839,7 +3810,6 @@ MediaCapabilityGrantsEnabled:
 MediaCaptionFormatTypesAllowedInLockdownMode:
   type: String
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: '"c608,wvtt"_str'
 
@@ -3856,14 +3826,12 @@ MediaCaptureRequiresSecureConnection:
 MediaCodecTypesAllowedInLockdownMode:
   type: String
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: '"mp4a.40,avc1"_str'
 
 MediaContainerTypesAllowedInLockdownMode:
   type: String
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: '"video/mp4,audio/mp4,video/x-m4v,audio/x-m4a,audio/mp3,application/x-mpegURL,application/vnd.apple.mpegURL,video/mp2t,video/iso.segment,audio/aac,audio/mpeg,audio/ac3,audio/eac3,video/mpeg2,text/vtt"_str'
 
@@ -4108,7 +4076,6 @@ MediaUserGestureInheritsFromDocument:
 MediaVideoCodecIDsAllowedInLockdownMode:
   type: String
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: '"avc1,zavc,qavc,cavc"_str'
 
@@ -4165,7 +4132,6 @@ MockCaptureDevicesEnabled:
 MockCaptureDevicesPromptEnabled:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -4370,7 +4336,6 @@ NeedsInAppBrowserPrivacyQuirks:
   defaultsOverridable: true
   humanReadableName: "Needs In-App Browser Privacy Quirks"
   humanReadableDescription: "Enable quirks needed to support In-App Browser privacy"
-  webKitLegacyExposed: false
   condition: ENABLE(APP_BOUND_DOMAINS)
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
@@ -4484,7 +4449,6 @@ OpenXRDMABufRelaxedForTesting:
   humanReadableName: "OpenXR DMA-BUF requirement relaxed for testing"
   humanReadableDescription: "During testing, allows relaxing the requirement that the GL display used by the OpenXR coordinator has MESA_image_dma_buf_export"
   condition: ENABLE(DEVELOPER_MODE) && USE(OPENXR)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -4531,7 +4495,6 @@ OverlayRegionsEnabled:
   humanReadableName: "Overlay Regions"
   humanReadableDescription: "Generate and visualize overlay regions"
   condition: ENABLE(OVERLAY_REGIONS_IN_EVENT_REGION)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -4595,7 +4558,6 @@ PageVisibilityBasedProcessSuppressionEnabled:
   category: dom
   humanReadableName: "Page visibility-based process suppression"
   humanReadableDescription: "Enable page visibility-based process suppression"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -4704,7 +4666,6 @@ PhotoPickerPrefersOriginalImageFormat:
   humanReadableName: "Photo Picker Prefers Original Image Format"
   humanReadableDescription: "Prefer the original image format when selecting photos for file upload"
   condition: HAVE(PHOTOS_UI)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -4792,7 +4753,6 @@ PreferFasterClickOverDoubleTap:
   humanReadableName: "Fast clicks beat DTTZ"
   humanReadableDescription: "Prefer a faster click over a double tap"
   condition: PLATFORM(IOS_FAMILY)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "PLATFORM(IOS_FAMILY) && !PLATFORM(WATCHOS)": true
@@ -4865,7 +4825,6 @@ ProcessSwapOnCrossSiteNavigationEnabled:
   category: networking
   humanReadableName: "Swap Processes on Cross-Site Navigation"
   humanReadableDescription: "Swap WebContent Processes on cross-site navigations"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "PLATFORM(PLAYSTATION)": false
@@ -5015,7 +4974,6 @@ ReplayCGDisplayListsIntoBackingStore:
   humanReadableName: "Dynamic Content Scaling: Replay for Testing"
   humanReadableDescription: "Replay Dynamic Content Scaling Display Lists into layer contents for testing"
   condition: ENABLE(RE_DYNAMIC_CONTENT_SCALING)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -5169,7 +5127,6 @@ SafeBrowsingEnabled:
   status: embedder
   humanReadableName: "Safe Browsing"
   humanReadableDescription: "Enable Safe Browsing"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -5276,7 +5233,6 @@ ScriptTrackingPrivacyProtectionsEnabled:
   status: internal
   humanReadableName: "Script Tracking Privacy Protections"
   humanReadableDescription: "Script tracking privacy protections enabled"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -5340,7 +5296,6 @@ ScrollViewAdaptiveDecelerationTrackingEnabled:
   status: internal
   humanReadableName: "Adaptive Deceleration Tracking"
   humanReadableDescription: "Use adaptive deceleration tracking behavior for scroll views"
-  webKitLegacyExposed: false
   condition: HAVE(UISCROLLVIEW_DECELERATION_TRACKING_BEHAVIOR)
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
@@ -5440,7 +5395,6 @@ ServiceControlsEnabled:
 ServiceWorkerEntitlementDisabledForTesting:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -6028,7 +5982,6 @@ SystemTextExtractionEnabled:
   humanReadableName: "System Text Extraction"
   humanReadableDescription: "Enable System Text Extraction"
   condition: ENABLE(SYSTEM_TEXT_EXTRACTION)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -6147,7 +6100,6 @@ TextExtractionDebugUIEnabled:
 TextExtractionEnabled:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "HAVE(UIINTELLIGENCESUPPORT_FRAMEWORK)": true
@@ -6158,7 +6110,6 @@ TextExtractionFilterEnabled:
   status: internal
   humanReadableName: "Text Extraction Filter"
   humanReadableDescription: "Enable Text Extraction Filter"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "ENABLE(TEXT_EXTRACTION_FILTER)": true
@@ -6168,7 +6119,6 @@ TextInputClientSelectionUpdatesEnabled:
   type: bool
   status: embedder
   condition: PLATFORM(MAC)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: WebKit::defaultTextInputClientSelectionUpdatesEnabled()
 
@@ -6225,7 +6175,6 @@ ThreadedScrollDrivenAnimationsEnabled:
 ThreadedScrollingEnabled:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -6382,7 +6331,6 @@ UpgradeKnownHostsToHTTPSEnabled:
   category: networking
   humanReadableName: "Upgrade known hosts to HTTPS"
   humanReadableDescription: "Upgrade known hosts to HTTPS"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -6391,7 +6339,6 @@ UseAVCaptureDeviceRotationCoordinatorAPI:
   status: internal
   humanReadableName: "Use AVCaptureDeviceRotationCoordinator API"
   humanReadableDescription: "Use AVCaptureDeviceRotationCoordinator API"
-  webKitLegacyExposed: false
   condition: HAVE(AVCAPTUREDEVICEROTATIONCOORDINATOR)
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
@@ -6405,7 +6352,6 @@ UseAlternatePDFHUD:
   category: html
   humanReadableName: "Alternate PDF HUD"
   humanReadableDescription: "Use the alternate PDF HUD"
-  webKitLegacyExposed: false
   condition: ENABLE(PDF_HUD)
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
@@ -6447,7 +6393,6 @@ UseCGDisplayListsForDOMRendering:
   humanReadableName: "Dynamic Content Scaling: DOM Rendering"
   humanReadableDescription: "Use Dynamic Content Scaling for DOM rendering"
   condition: ENABLE(RE_DYNAMIC_CONTENT_SCALING)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy ]
   defaultValue: true
   sharedPreferenceForWebProcess: true
@@ -6472,7 +6417,6 @@ UseGPUProcessForCanvasRenderingEnabled:
   humanReadableName: "GPU Process: Canvas Rendering"
   humanReadableDescription: "Enable canvas rendering in GPU Process"
   condition: ENABLE(GPU_PROCESS) && !(PLATFORM(GTK) || PLATFORM(WPE))
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "ENABLE(GPU_PROCESS_BY_DEFAULT)": true
@@ -6486,7 +6430,6 @@ UseGPUProcessForDOMRenderingEnabled:
   humanReadableName: "GPU Process: DOM Rendering"
   humanReadableDescription: "Enable DOM rendering in GPU Process"
   condition: ENABLE(GPU_PROCESS)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: defaultUseGPUProcessForDOMRenderingEnabled()
   sharedPreferenceForWebProcess: true
@@ -6498,7 +6441,6 @@ UseGPUProcessForDisplayCapture:
   humanReadableName: "GPU Process: Screen and Window capture"
   humanReadableDescription: "Display capture in GPU Process"
   condition: HAVE(SCREEN_CAPTURE_KIT)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: true
 
@@ -6508,7 +6450,6 @@ UseGPUProcessForMediaEnabled:
   humanReadableName: "GPU Process: Media"
   humanReadableDescription: "Do all media loading and playback in the GPU Process"
   condition: ENABLE(GPU_PROCESS)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "ENABLE(GPU_PROCESS_BY_DEFAULT) && !USE(GSTREAMER)": true
@@ -6522,7 +6463,6 @@ UseGPUProcessForWebGLEnabled:
   humanReadableName: "GPU Process: WebGL"
   humanReadableDescription: "Process all WebGL operations in GPU Process"
   condition: ENABLE(GPU_PROCESS) && ENABLE(WEBGL)
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue:
     "ENABLE(GPU_PROCESS_BY_DEFAULT) && ENABLE(GPU_PROCESS_WEBGL_BY_DEFAULT)": true
@@ -6625,7 +6565,6 @@ UsesEncodingDetector:
 UsesSingleWebProcess:
   type: bool
   status: embedder
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
   sharedPreferenceForWebProcess: true
@@ -6728,7 +6667,6 @@ ViewGestureDebuggingEnabled:
   status: embedder
   humanReadableName: "View gesture debugging"
   humanReadableDescription: "Enable view gesture debugging"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false
 
@@ -6736,7 +6674,8 @@ VisibleDebugOverlayRegions:
   type: uint32_t
   status: embedder
   defaultsOverridable: true
-  webcoreType: DebugOverlayRegions
+  # FIXME: webkit.org/b/217551 dropped the DebugOverlayRegions type WebCore generated.
+  # Restoring it as an OptionSet needs refinedType to use fromRaw(), not static_cast.
   defaultValue: 0
 
 VisualTranslationEnabled:
@@ -7605,6 +7544,5 @@ ZoomOnDoubleTapWhenRoot:
   condition: PLATFORM(IOS_FAMILY)
   humanReadableName: "DTTZ also when root"
   humanReadableDescription: "Double taps zoom, even if we dispatched a click on the root nodes"
-  webKitLegacyExposed: false
   excludeFrom: [ WebKitLegacy, WebCore ]
   defaultValue: false

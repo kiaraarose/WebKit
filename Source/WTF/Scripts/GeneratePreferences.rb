@@ -64,6 +64,16 @@ def frontendsFor(opts)
   FRONTENDS - (opts["excludeFrom"] || [])
 end
 
+KEYS = %w{
+  category comment condition defaultValue defaultsOverridable disableInLockdownMode
+  excludeFrom getter hidden humanReadableDescription humanReadableName
+  inspectorOverride jscOptionName mediaPlaybackRelated refinedType richJavaScript
+  sharedPreferenceForWebProcess status type webKitLegacyBinding webKitLegacyExposed
+  webKitLegacyPreferenceKey webcoreDeprecatedGlobalSettings
+  webcoreExcludeFromInternalSettings webcoreGetter webcoreImplementation webcoreName
+  webcoreOnChange
+}
+
 # "defaultValue" is the value shared by every frontend the preference is in,
 # either directly or as a map of build conditions ending in "default". A frontend
 # is listed under it only where its value differs.
@@ -87,8 +97,7 @@ def validate(path, parsed)
   end
 
   parsed.each do |name, opts|
-    # Retired in favour of "webcoreDeprecatedGlobalSettings" and "excludeFrom".
-    reject.call name, "\"webcoreBinding\" is no longer used: say \"webcoreDeprecatedGlobalSettings: true\", or exclude WebCore." if opts.key?("webcoreBinding")
+    (opts.keys - KEYS).each { |key| reject.call name, "\"#{key}\" is not a known key." }
     reject.call name, "\"webcoreDeprecatedGlobalSettings\" is only ever true, so leave it out instead." if opts.key?("webcoreDeprecatedGlobalSettings") && opts["webcoreDeprecatedGlobalSettings"] != true
 
     excluded = opts["excludeFrom"]
@@ -101,8 +110,8 @@ def validate(path, parsed)
       reject.call name, "\"excludeFrom\" excludes every frontend, so the preference would not exist anywhere." if excluded == FRONTENDS
     end
 
-    reject.call name, "\"exposed\" is no longer used: only WebKit1 ever read it, so say \"webKitLegacyExposed: false\"." if opts.key?("exposed")
     reject.call name, "\"webKitLegacyExposed\" is only ever false, so leave it out instead." if opts.key?("webKitLegacyExposed") && opts["webKitLegacyExposed"] != false
+    reject.call name, "\"webKitLegacyExposed\" says nothing when WebKitLegacy is excluded." if opts["webKitLegacyExposed"] == false && !frontendsFor(opts).include?("WebKitLegacy")
 
     specification = opts["defaultValue"]
     if specification.nil?
