@@ -2787,7 +2787,7 @@ void SpeculativeJIT::emitDoubleToInt32(FPRReg fpr, GPRReg gpr)
 #endif
     Jump notTruncatedToInteger = branchTruncateDoubleToInt32(fpr, gpr, BranchIfTruncateFailed);
     addSlowPathGenerator(slowPathCall(notTruncatedToInteger, this,
-        hasSensibleDoubleToInt() ? operationToInt32SensibleSlow : operationToInt32, NeedToSpill, ExceptionCheckRequirement::CheckNotNeeded, gpr, fpr));
+        operationToInt32, NeedToSpill, ExceptionCheckRequirement::CheckNotNeeded, gpr, fpr));
 }
 
 void SpeculativeJIT::compileValueToInt32(Node* node)
