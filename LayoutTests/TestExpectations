@@ -7800,6 +7800,9 @@ ipc/create-image-buffer-crash.html [ Skip ]
 ipc/validate-media-constraint.html [ Skip ]
 ipc/validate-message-check-in-networkconnectiontowebprocess.html [ Skip ]
 
+# Testing MESSAGE_CHECK of sync messages is incorrect.
+webkit.org/b/323670 ipc/getpixelbuffer-layerbacking-heap-disclosure.html [ Skip ]
+
 # webkit.org/b/287275 [ Sequoia EWS] media/video-replaces-poster.html is a flaky crash
 media/video-presentation-mode.html [ Skip ]
 
